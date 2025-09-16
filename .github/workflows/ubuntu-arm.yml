@@ -61,6 +61,7 @@ jobs:
       uses: actions/upload-artifact@v4
       continue-on-error: true
       with:
-        name: MangoHud-${{ matrix.os }}
-        path: ${{runner.workspace}}/MangoHud/
-        include-hidden-files: true
+        name: MangoHud-${{ matrix.os }}-${{ matrix.compiler }}-aarch64
+        path: |
+          ${{runner.workspace}}/MangoHud/builddir/
+          ${{runner.workspace}}/MangoHud/data/
