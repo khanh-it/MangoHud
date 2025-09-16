@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         compiler: [clang, gcc]
-        os: [ubuntu-22.04-arm, ubuntu-24.04-arm]
+        os: [ubuntu-22.04-arm]
     runs-on: ${{ matrix.os }}
     steps:
     - name: 'Checkout'
@@ -57,3 +57,10 @@ jobs:
       run: meson compile -C ./builddir || ninja -C ./builddir
     - name: 'Install'
       run: sudo meson install -C ./builddir
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      continue-on-error: true
+      with:
+        name: MangoHud-${{ matrix.os }}
+        path: ${{runner.workspace}}/MangoHud/
+        include-hidden-files: true
